@@ -57,7 +57,11 @@ def triage(rows: list[dict], params: dict) -> list[dict]:
 
 def decision_counts(results: list[dict]) -> dict[str, int]:
     """Number of results per decision; keys are always prioritize, review, exclude (in order)."""
-    raise NotImplementedError("TODO: implement decision_counts")
+    counter = {"prioritize": 0, "review": 0, "exclude": 0}
+    for result in results:
+        counter[result["decision"]] += 1
+    return counter
+
 
 
 def impact_counts(results: list[dict]) -> dict[str, int]:
@@ -65,7 +69,13 @@ def impact_counts(results: list[dict]) -> dict[str, int]:
 
     Keys are always high, moderate, low, modifier (in that order), zeros included.
     """
-    raise NotImplementedError("TODO: implement impact_counts")
+    counter = {"high": 0, "moderate": 0, "low": 0, "modifier": 0}
+    for result in results:
+        if result["decision"] == "exclude":
+            continue
+        impact = result["impact"].strip().lower()
+        counter[impact] += 1
+    return counter
 
 
 def gene_summary(results: list[dict]) -> dict[str, dict]:
