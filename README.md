@@ -5,12 +5,12 @@
 
 ## Group
 
-- Group ID: <your group id>
-- Members: <full name (matric)>, <full name (matric)>, <full name (matric)>
+- Group ID: G02
+- Members: MUHAMMAD NASYAT BIN MOHAMAD NASIR (A24CS0141), ZARIFF BIN MOHAMMAD AZAM(A24CS0217), MOHAMAD FARHAN BIN MOHAMAD HARIRI (A24CS0114), MOHAMAD ASYIK ILLAHI BIN NASRUDDIN (A24CS0113)
 
 ## What this project does
 
-<Three or four sentences: what a variant triage service is, what goes in, what comes out.>
+A library sorting service decides which returned books go back on the shelf, which need repair, and which are removed. Each book arrives as a record with a title, a condition score and a damage type. The service also receives settings, such as the minimum condition score for shelving. It returns a decision and a reason for every book, plus counts, a ranked list of the most urgent repairs, and a short report.
 
 ## Set up
 
@@ -24,6 +24,10 @@ pip install -r requirements.txt
 
 <Write the exact command. The course command is: python src/a1_triage.py data/variants.csv data/params.json results>
 <Say which files appear in results/.>
+
+    python -m pytest                 # all tests
+    ruff check src                   # style check
+    python src/a1_triange.py data/variants.csv data/params.json --out results/cli      # the command-line tool
 
 ## Test and lint
 
