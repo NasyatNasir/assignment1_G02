@@ -5,6 +5,7 @@ reason for every decision and produces summaries, a ranked top-k list, a CSV tex
 and a short text report. Nothing here is clinical advice.
 """
 import csv
+import io
 import json
 import sys
 from pathlib import Path
@@ -93,7 +94,12 @@ def results_to_csv(results: list[dict]) -> str:
 
     Every line ends with a newline. Reason text contains no commas, so no quoting is needed.
     """
-    raise NotImplementedError("TODO: implement results_to_csv")
+    buffer=io.StringIO()
+    writer=csv.writer(buffer,lineterminator="\n")
+    writer.writerow(CSV_COLUMNS)
+    for result in results:
+        writer.writerow([result.get(column,"") for column in CSV_COLUMNS])
+    return buffer.getvalue()
 
 
 def build_report(results: list[dict], params: dict) -> str:
@@ -103,7 +109,20 @@ def build_report(results: list[dict], params: dict) -> str:
     'Variants: N', one 'decision: count' line per decision, a blank line,
     'Top K variants' and then 'rank. variant | gene | impact | decision' lines.
     """
-    raise NotImplementedError("TODO: implement build_report")
+    k= params["top_k"]
+    counts=decision_counts(results)
+    lines= [
+        "Variant Triage Report",
+        f"Thresholds:min depth={params['min_depth']} min_quality={params['min_quality']}",
+        f"Priority genes : {', '.join(params['priority_genes'])}",
+        f"Variants: {len(results)}",
+    ]
+    lines.extend(f"{decision}:{count}" for decision,count in counts.items())
+    lines.append("")
+    lines.append(f"Top{k}variants")
+    for rank,row in enumerate(rank_variants(results,k),start=1):
+        lines.append(f"{rank}. {row['variant']} | {row['gene']} | {row['impact']} | {row['decision']}")
+    return "\n".join(lines) + "\n"
 
 
 def main(argv: list[str] | None = None) -> int:
