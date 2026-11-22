@@ -82,6 +82,93 @@
 # AI USE LOG: MEMBER 2
 
 - Course: SECB3203
+- Assessment: Assignment 1
+- Student name: ZARIFF BIN MOHAMMAD AZAM
+- Matric no: A24CS0217
+- Group ID: G02
+- AI level: 1
+- Tools cited: Anthropic (2026). Claude (3.5 Sonnet). Retrieved 22 November 2026 from https://claude.ai/
+
+## Declaration (tick exactly one)
+
+- [ ] NIL RETURN: I did not use any generative AI tool for this assessment.
+- [/] I used AI. Every interaction that influenced my work is logged below. The log is true and complete.
+
+## Entry 1
+
+- Date: 22 November 2026
+- Tool: Anthropic (2026). Claude (3.5 Sonnet). Retrieved 22 November 2026 from https://claude.ai/
+- Purpose: 
+- Prompt: \
+    Help me draft some tests for the functions gene_summary() and rank_variants()
+- Output: \
+    I recommend creating three tests in tests/test_a1_triage_own.py: \
+    - Test 1: gene_summary() — checks counting, mean depth and alphabetical ordering. \
+    - Test 2: rank_variants() — checks the sorting order and exclusion of variants. \
+    - Test 3: rank_variants() — checks that negative k raises ValueError.
+
+- Verified by: \
+    verified by implementing tests and ran pytest
+- My change: \
+    accepted, the tests cover both functions in detail
+- Used in: \
+    test_gene_summary(), test_rank_variants in test_a1_triage.py
+
+## Entry 2
+
+- Date: 22 November 2026
+- Tool: Anthropic (2026). Claude (3.5 Sonnet). Retrieved 22 November 2026 from https://claude.ai/
+- Purpose: debug
+- Prompt: \
+    Why am I getting the error "pytest not defined" when using with pytest.raises(ValueError)?  
+- Output: \
+    Explained that the pytest module was not imported and suggested adding import pytest at the beginning of the test file.
+
+- Verified by: \
+    verified by added the import statement and ran pytest
+- My change: \
+    accepted, adding import pytest resolved the issue
+- Used in: \
+    test_a1_triage.py
+
+## Entry 3
+
+- Date: 22 November 2026
+- Tool: Anthropic (2026). Claude (3.5 Sonnet). Retrieved 22 November 2026 from https://claude.ai/
+- Purpose: explain  
+- Prompt: \
+    What is the difference between raising a ValueError and checking for a ValueError using pytest?
+- Output: \
+    Explained that raise ValueError is used in the actual function to signal invalid input, while pytest.raises(ValueError) is used in a test to verify that the exception occurs.
+
+- Verified by: \
+    verified by compared the implementation of rank_variants() with the corresponding test
+- My change: \
+    n/a
+- Used in: \
+    test_a1_triage.py
+
+## Entry 4
+
+- Date: 22 November 2026
+- Tool: Anthropic (2026). Claude (3.5 Sonnet). Retrieved 22 November 2026 from https://claude.ai/
+- Purpose: hint
+- Prompt: \
+    Give me a hint on how to test that rank_variants(results, k) raises a ValueError when k is negative.
+- Output: \
+    Suggested testing the function with a negative value of k and using pytest.raises(ValueError) to check the expected exception.
+
+- Verified by: \
+    verified by ran pytest
+- My change: \
+    accepted, wrote my own test using -1 as the input for k
+- Used in: \
+    test_rank_variants_negative_k() in test_a1_triage.py
+
+
+# AI USE LOG: MEMBER 3
+
+- Course: SECB3203
 - Assessment: <e.g. Lab 4>
 - Student name: <full name>
 - Matric no: <matric>
@@ -100,60 +187,13 @@
 - Tool: <Tool name, version, access date and URL (UTM citation format)>
 - Purpose: <One of: explain, hint, review, debug, generate-code, generate-text, tests-plan, other>
 - Prompt: <The exact prompt you typed (paste it)>
-- Output: Quick update: the two functions are written and the end-to-end run works in a scratch copy. I'm now installing pytest and ruff to run the visible tests and lint check before handing the file over.
-I've implemented results_to_csv and build_report in a1_triage.py. ruff check src passes on it. I couldn't run it for real, because the other functions in your file are still NotImplementedError. I tested both in a scratch copy with my own temporary versions of those functions. Your 6 visible tests passed there, and the run on your variants.csv and params.json wrote triage.csv (51 lines) and report.txt
+- Output: <What the AI gave back, in 1 to 3 lines (attach the full text if you used it)>
 - Verified by: <How you checked it: ran pytest, read the docs, compared with data, asked lecturer>
 - My change: <What you accepted, rejected or rewrote, and why>
 - Used in: <File and function, or report section, where it ended up (or 'not used')>
 
 <!-- Copy the whole 'Entry' block for each extra interaction: ## Entry 2, ## Entry 3 ... -->
 
-# AI USE LOG: MEMBER 3
-
-- Course: SECB3203
-- Assessment: Assignment 1
-- Student name: Mohamad Asyik Illahi bin Nasruddim
-- Matric no: A24CS0113
-- Group ID: 2
-- AI level: 1
-- Tools cited: Anthropic (2026). Claude (Claude Sonnet 5.5). Retrieved 21 November 2026 from https://claude.ai
-
-## Declaration (tick exactly one)
-
-- [ ] NIL RETURN: I did not use any generative AI tool for this assessment.
-- [/] I used AI. Every interaction that influenced my work is logged below. The log is true and complete.
-
-## Entry 1
-
-- Date: <21/11/2026 2:00 pm>
-- Tools cited: Anthropic (2026). Claude (Claude Sonnet 5.5). Retrieved 22 November 2026 from https://claude.ai
-- - Purpose:  generate-code
-- Prompt: help me to code report to csv and build report in triage.py
-- Output: Quick update: the two functions are written and the end-to-end run works in a scratch copy. I'm now installing pytest and ruff to run the visible tests and lint check before handing the file over.
-I've implemented results_to_csv and build_report in a1_triage.py. ruff check src passes on it. I couldn't run it for real, because the other functions in your file are still NotImplementedError. I tested both in a scratch copy with my own temporary versions of those functions. Your 6 visible tests passed there, and the run on your variants.csv and params.json wrote triage.csv (51 lines) and report.txt
-- Verified by: <How you checked it: ran pytest
-- My change: get content of the code
-- Used in: src/ file
--  
-## Entry 2
-
-- Date: <21/11/2026 2:00 pm>
-- Tools cited: Anthropic (2026). Claude (Claude Sonnet 5.5). Retrieved 22 November 2026 from https://claude.ai
-- - Purpose:  generate-code
-- Prompt: give me explaination about these two functions and expected output
-- Output: 1. results_to_csv(results)
-Purpose: turns the list of classified variants into one CSV text string. main() writes that string to results/triage.csv.
-How it works, line by line:
-code	What it does
-io.StringIO()	Creates an in-memory "file" so the CSV is built as text, not written to disk.
-csv.writer(buffer, lineterminator="\n")	Writes CSV rows into that buffer. lineterminator="\n" makes every line end with a newline, as the docstring requires.
-writer.writerow(CSV_COLUMNS)	Writes the header line first.
-for result in results:	Loops through the results in their given order, with no sorting.
-[result.get(column, "") for column in CSV_COLUMNS]	Picks the values in the fixed column order. Columns like ref and alt are not in CSV_COLUMNS, so they are dropped. A missing key gives an empty string instead of a crash.
-- Verified by: <How you checked it: ran pytest
-- My change: get content of the code
-- Used in: src/ file
-- 
 # AI USE LOG: MEMBER 4
 
 - Course: SECB3203
@@ -186,6 +226,6 @@ for result in results:	Loops through the results in their given order, with no s
 ## Group signatures
 
 - Signed: MUHAMMAD NASYAT BIN MOHAMAD NASIR, A24CS0141, 22/11/2026
-- Signed: <full name, matric, date>
+- Signed: ZARIFF BIN MOHAMMAD AZAM, A24CS0217, 22/11/2026
 - Signed: <full name, matric, date>
 - Signed: <full name, matric, date>

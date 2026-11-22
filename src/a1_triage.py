@@ -118,7 +118,32 @@ def gene_summary(results: list[dict]) -> dict[str, dict]:
     Each value is {"total": n, "prioritize": a, "review": b, "exclude": c, "mean_depth": d}
     where mean_depth is the mean depth of ALL the gene's variants, rounded to 1 decimal.
     """
-    raise NotImplementedError("TODO: implement gene_summary")
+    summary = {}
+
+    for result in results:
+        gene = result["gene"]
+
+        if gene not in summary:
+            summary[gene] = {
+                "total": 0,
+                "prioritize": 0,
+                "review": 0,
+                "exclude": 0,
+                "depth_sum": 0
+            }
+
+        summary[gene]["total"] += 1
+        summary[gene][result["decision"]] += 1
+        summary[gene]["depth_sum"] += int(result["depth"])
+
+    for gene in summary:
+        total = summary[gene]["total"]
+        depth_sum = summary[gene]["depth_sum"]
+
+        summary[gene]["mean_depth"] = round(depth_sum / total, 1)
+        del summary[gene]["depth_sum"]
+
+    return dict(sorted(summary.items()))
 
 
 def rank_variants(results: list[dict], k: int) -> list[dict]:
@@ -130,7 +155,39 @@ def rank_variants(results: list[dict], k: int) -> list[dict]:
     Raises:
         ValueError: if k is negative.
     """
-    raise NotImplementedError("TODO: implement rank_variants")
+    if k < 0:
+        raise ValueError("k cannot be negative")
+
+    impact_priority = {
+        "high": 0,
+        "moderate": 1,
+        "low": 2,
+        "modifier": 3
+    }
+
+    decision_priority = {
+        "prioritize": 0,
+        "review": 1
+    }
+
+    eligible = []
+
+    for result in results:
+        if result["decision"] != "exclude":
+            eligible.append(result)
+
+    ranked = sorted(
+        eligible,
+        key=lambda row: (
+            decision_priority[row["decision"]],
+            impact_priority[row["impact"].strip().lower()],
+            -int(row["quality"]),
+            -int(row["depth"]),
+            int(row["pos"])
+        )
+    )
+
+    return ranked[:k]
 
 
 def results_to_csv(results: list[dict]) -> str:
