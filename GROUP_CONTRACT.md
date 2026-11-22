@@ -72,6 +72,6 @@ every member signs the log and this contract.
 ## 8. Signatures
 
 - Signed: MUHAMMAD NASYAT BIN MOHAMAD NASIR, A24CS0141, 17/11/2026
-- Signed: <full name>, <matric number>, <date>
+- Signed: ZARIFF BIN MOHAMMAD AZAM, A24CS0217, 18/11/2026
 - Signed: <full name>, <matric number>, <date>
 - Signed: <full name>, <matric number>, <date>
