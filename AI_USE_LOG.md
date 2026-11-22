@@ -82,17 +82,34 @@
 # AI USE LOG: MEMBER 2
 
 - Course: SECB3203
-- Assessment: <e.g. Lab 4>
-- Student name: <full name>
-- Matric no: <matric>
-- Group ID: <group work only, else n/a>
-- AI level: <0, 1 or 2 - see the assessment brief>
-- Tools cited: <UTM format, e.g. OpenAI (2026). ChatGPT (GPT-5). Retrieved 12 October 2026 from https://chat.openai.com>
+- Assessment: Assignment 1
+- Student name: ZARIFF BIN MOHAMMAD AZAM
+- Matric no: A24CS0217
+- Group ID: G02
+- AI level: 1
+- Tools cited: Anthropic (2026). Claude (3.5 Sonnet). Retrieved 22 November 2026 from https://claude.ai/
 
 ## Declaration (tick exactly one)
 
 - [ ] NIL RETURN: I did not use any generative AI tool for this assessment.
-- [ ] I used AI. Every interaction that influenced my work is logged below. The log is true and complete.
+- [/] I used AI. Every interaction that influenced my work is logged below. The log is true and complete.
+
+## Entry 1
+
+- Date: 22 November 2026
+- Tool: Anthropic (2026). Claude (3.5 Sonnet). Retrieved 22 November 2026 from https://claude.ai/
+- Purpose: explain, hint, review, debug, generate-code, generate-text, tests-plan, other  
+- Prompt: \
+    What
+- Output: \
+    It
+
+- Verified by: \
+    verified by ran pytest, read the docs, compared with data, asked lecturer
+- My change: \
+    accepted, rejected or rewrote, and why
+- Used in: \
+    blbl
 
 ## Entry 1
 
@@ -105,7 +122,6 @@
 - My change: <What you accepted, rejected or rewrote, and why>
 - Used in: <File and function, or report section, where it ended up (or 'not used')>
 
-<!-- Copy the whole 'Entry' block for each extra interaction: ## Entry 2, ## Entry 3 ... -->
 
 # AI USE LOG: MEMBER 3
 
@@ -167,6 +183,6 @@
 ## Group signatures
 
 - Signed: MUHAMMAD NASYAT BIN MOHAMAD NASIR, A24CS0141, 22/11/2026
-- Signed: <full name, matric, date>
+- Signed: ZARIFF BIN MOHAMMAD AZAM, A24CS0217, 22/11/2026
 - Signed: <full name, matric, date>
 - Signed: <full name, matric, date>
