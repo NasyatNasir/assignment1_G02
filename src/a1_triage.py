@@ -18,6 +18,12 @@ CSV_COLUMNS = [
 ]
 CLI_ARGUMENTS = 3
 
+DECISION_EXCLUDE = "exclude"
+DECISION_PRIORITIZE = "prioritize"
+DECISION_REVIEW = "review"
+
+HIGH_IMPACT = {"high", "moderate"}
+LOW_IMPACT = {"low", "modifier"}
 
 def load_variants(path) -> list[dict]:
     """Read variants.csv into a list of dicts. Every value stays text (Week 6 explains how)."""
@@ -44,7 +50,29 @@ def classify_variant(row: dict, params: dict) -> tuple[str, str]:
     Gene symbols and impact labels are compared after strip() and case folding.
     depth, quality and pos may arrive as text.
     """
-    raise NotImplementedError("TODO: implement classify_variant")
+    depth = int(row["depth"])
+    quality = int(row["quality"])
+    min_depth = int(params["min_depth"])
+    min_quality = int(params["min_quality"])
+
+    gene = str(row["gene"]).strip().casefold()
+    impact = str(row["impact"]).strip().casefold()
+
+    priority_set = {str(g).strip().casefold() for g in params["priority_genes"]}
+    is_priority = gene in priority_set
+
+    if depth < min_depth:
+        return DECISION_EXCLUDE, f"low depth {depth} < min_depth {min_depth}"
+    elif quality < min_quality:
+        return DECISION_EXCLUDE, f"low quality {quality} < min_quality {min_quality}"
+    elif is_priority and impact in HIGH_IMPACT:
+        return DECISION_PRIORITIZE, f"priority gene {gene} with {impact} impact"
+    elif is_priority and impact in LOW_IMPACT:
+        return DECISION_REVIEW, f"priority gene {gene} with {impact} impact"
+    elif not is_priority and impact in HIGH_IMPACT:
+        return DECISION_REVIEW, f"non-priority gene {gene} with {impact} impact"
+    else:
+        return DECISION_EXCLUDE, f"non-priority gene {gene} with {impact} impact"
 
 
 def triage(rows: list[dict], params: dict) -> list[dict]:
@@ -52,8 +80,14 @@ def triage(rows: list[dict], params: dict) -> list[dict]:
 
     The input rows and params are never modified.
     """
-    raise NotImplementedError("TODO: implement triage")
-
+    results = []
+    for row in rows:
+        decision, reason = classify_variant(row, params)
+        new_row = dict(row)
+        new_row["decision"] = decision
+        new_row["reason"] = reason
+        results.append(new_row)
+    return results
 
 def decision_counts(results: list[dict]) -> dict[str, int]:
     """Number of results per decision; keys are always prioritize, review, exclude (in order)."""
