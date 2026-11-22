@@ -100,7 +100,8 @@
 - Tool: <Tool name, version, access date and URL (UTM citation format)>
 - Purpose: <One of: explain, hint, review, debug, generate-code, generate-text, tests-plan, other>
 - Prompt: <The exact prompt you typed (paste it)>
-- Output: <What the AI gave back, in 1 to 3 lines (attach the full text if you used it)>
+- Output: Quick update: the two functions are written and the end-to-end run works in a scratch copy. I'm now installing pytest and ruff to run the visible tests and lint check before handing the file over.
+I've implemented results_to_csv and build_report in a1_triage.py. ruff check src passes on it. I couldn't run it for real, because the other functions in your file are still NotImplementedError. I tested both in a scratch copy with my own temporary versions of those functions. Your 6 visible tests passed there, and the run on your variants.csv and params.json wrote triage.csv (51 lines) and report.txt
 - Verified by: <How you checked it: ran pytest, read the docs, compared with data, asked lecturer>
 - My change: <What you accepted, rejected or rewrote, and why>
 - Used in: <File and function, or report section, where it ended up (or 'not used')>
@@ -110,31 +111,49 @@
 # AI USE LOG: MEMBER 3
 
 - Course: SECB3203
-- Assessment: <e.g. Lab 4>
-- Student name: <full name>
-- Matric no: <matric>
-- Group ID: <group work only, else n/a>
-- AI level: <0, 1 or 2 - see the assessment brief>
-- Tools cited: <UTM format, e.g. OpenAI (2026). ChatGPT (GPT-5). Retrieved 12 October 2026 from https://chat.openai.com>
+- Assessment: Assignment 1
+- Student name: Mohamad Asyik Illahi bin Nasruddim
+- Matric no: A24CS0113
+- Group ID: 2
+- AI level: 1
+- Tools cited: Anthropic (2026). Claude (Claude Sonnet 5.5). Retrieved 21 November 2026 from https://claude.ai
 
 ## Declaration (tick exactly one)
 
 - [ ] NIL RETURN: I did not use any generative AI tool for this assessment.
-- [ ] I used AI. Every interaction that influenced my work is logged below. The log is true and complete.
+- [/] I used AI. Every interaction that influenced my work is logged below. The log is true and complete.
 
 ## Entry 1
 
-- Date: <Date and time of the interaction>
-- Tool: <Tool name, version, access date and URL (UTM citation format)>
-- Purpose: <One of: explain, hint, review, debug, generate-code, generate-text, tests-plan, other>
-- Prompt: <The exact prompt you typed (paste it)>
-- Output: <What the AI gave back, in 1 to 3 lines (attach the full text if you used it)>
-- Verified by: <How you checked it: ran pytest, read the docs, compared with data, asked lecturer>
-- My change: <What you accepted, rejected or rewrote, and why>
-- Used in: <File and function, or report section, where it ended up (or 'not used')>
+- Date: <21/11/2026 2:00 pm>
+- Tools cited: Anthropic (2026). Claude (Claude Sonnet 5.5). Retrieved 22 November 2026 from https://claude.ai
+- - Purpose:  generate-code
+- Prompt: help me to code report to csv and build report in triage.py
+- Output: Quick update: the two functions are written and the end-to-end run works in a scratch copy. I'm now installing pytest and ruff to run the visible tests and lint check before handing the file over.
+I've implemented results_to_csv and build_report in a1_triage.py. ruff check src passes on it. I couldn't run it for real, because the other functions in your file are still NotImplementedError. I tested both in a scratch copy with my own temporary versions of those functions. Your 6 visible tests passed there, and the run on your variants.csv and params.json wrote triage.csv (51 lines) and report.txt
+- Verified by: <How you checked it: ran pytest
+- My change: get content of the code
+- Used in: src/ file
+-  
+## Entry 2
 
-<!-- Copy the whole 'Entry' block for each extra interaction: ## Entry 2, ## Entry 3 ... -->
-
+- Date: <21/11/2026 2:00 pm>
+- Tools cited: Anthropic (2026). Claude (Claude Sonnet 5.5). Retrieved 22 November 2026 from https://claude.ai
+- - Purpose:  generate-code
+- Prompt: give me explaination about these two functions and expected output
+- Output: 1. results_to_csv(results)
+Purpose: turns the list of classified variants into one CSV text string. main() writes that string to results/triage.csv.
+How it works, line by line:
+code	What it does
+io.StringIO()	Creates an in-memory "file" so the CSV is built as text, not written to disk.
+csv.writer(buffer, lineterminator="\n")	Writes CSV rows into that buffer. lineterminator="\n" makes every line end with a newline, as the docstring requires.
+writer.writerow(CSV_COLUMNS)	Writes the header line first.
+for result in results:	Loops through the results in their given order, with no sorting.
+[result.get(column, "") for column in CSV_COLUMNS]	Picks the values in the fixed column order. Columns like ref and alt are not in CSV_COLUMNS, so they are dropped. A missing key gives an empty string instead of a crash.
+- Verified by: <How you checked it: ran pytest
+- My change: get content of the code
+- Used in: src/ file
+- 
 # AI USE LOG: MEMBER 4
 
 - Course: SECB3203
