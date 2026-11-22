@@ -155,7 +155,39 @@ def rank_variants(results: list[dict], k: int) -> list[dict]:
     Raises:
         ValueError: if k is negative.
     """
-    raise NotImplementedError("TODO: implement rank_variants")
+    if k < 0:
+        raise ValueError("k cannot be negative")
+
+    impact_priority = {
+        "high": 0,
+        "moderate": 1,
+        "low": 2,
+        "modifier": 3
+    }
+
+    decision_priority = {
+        "prioritize": 0,
+        "review": 1
+    }
+
+    eligible = []
+
+    for result in results:
+        if result["decision"] != "exclude":
+            eligible.append(result)
+
+    ranked = sorted(
+        eligible,
+        key=lambda row: (
+            decision_priority[row["decision"]],
+            impact_priority[row["impact"].strip().lower()],
+            -int(row["quality"]),
+            -int(row["depth"]),
+            int(row["pos"])
+        )
+    )
+
+    return ranked[:k]
 
 
 def results_to_csv(results: list[dict]) -> str:
