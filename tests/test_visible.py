@@ -61,7 +61,8 @@ def with_top_k(k):
 def run(rows, params=GROUP_PARAMS):
     results = triage(rows, params)
     return results, results_to_csv(results), build_report(results, params)
-
+    
+"""Extra testing function"""
 def test_csv_has_one_line_per_result_in_the_given_order():
     rows = [make_row("v1", gene="TP53"), make_row("v2", gene="MYC", impact="low")]
     _, csv_text, _ = run(rows)
@@ -70,6 +71,7 @@ def test_csv_has_one_line_per_result_in_the_given_order():
     assert lines[1].startswith("v1,TP53,17,1000,40,95,high,prioritize,")
     assert lines[2].startswith("v2,MYC,17,1000,40,95,low,exclude,")
     
+"""Extra testing function"""
 def test_report_shows_thresholds_priority_genes_and_total():
     _, _, report = run([make_row(gene="TP53")])
     assert "Thresholds: min_depth=12 min_quality=70" in report
