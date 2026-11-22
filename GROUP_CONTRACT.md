@@ -73,5 +73,5 @@ every member signs the log and this contract.
 
 - Signed: MUHAMMAD NASYAT BIN MOHAMAD NASIR, A24CS0141, 17/11/2026
 - Signed: <full name>, <matric number>, <date>
-- Signed: <full name>, <matric number>, <date>
+- Signed: MOHAMAD FARHAN BIN MOHAMAD HARIRI, A24CS0114, 17/11/2026
 - Signed: <full name>, <matric number>, <date>
