@@ -22,8 +22,7 @@ DECISION_EXCLUDE = "exclude"
 DECISION_PRIORITIZE = "prioritize"
 DECISION_REVIEW = "review"
 
-HIGH_IMPACT = {"high", "moderate"}
-LOW_IMPACT = {"low", "modifier"}
+LOW_IMPACT = frozenset(IMPACT_ORDER) - PRIORITY_IMPACTS
 
 def load_variants(path) -> list[dict]:
     """Read variants.csv into a list of dicts. Every value stays text (Week 6 explains how)."""
@@ -55,24 +54,26 @@ def classify_variant(row: dict, params: dict) -> tuple[str, str]:
     min_depth = int(params["min_depth"])
     min_quality = int(params["min_quality"])
 
-    gene = str(row["gene"]).strip().casefold()
-    impact = str(row["impact"]).strip().casefold()
+    gene = str(row["gene"]).strip().upper()
+    impact = str(row["impact"]).strip().lower()
 
-    priority_set = {str(g).strip().casefold() for g in params["priority_genes"]}
+    priority_set = {str(g).strip().upper() for g in params["priority_genes"]}
     is_priority = gene in priority_set
 
     if depth < min_depth:
-        return DECISION_EXCLUDE, f"low depth {depth} < min_depth {min_depth}"
-    elif quality < min_quality:
-        return DECISION_EXCLUDE, f"low quality {quality} < min_quality {min_quality}"
-    elif is_priority and impact in HIGH_IMPACT:
-        return DECISION_PRIORITIZE, f"priority gene {gene} with {impact} impact"
-    elif is_priority and impact in LOW_IMPACT:
-        return DECISION_REVIEW, f"priority gene {gene} with {impact} impact"
-    elif not is_priority and impact in HIGH_IMPACT:
-        return DECISION_REVIEW, f"non-priority gene {gene} with {impact} impact"
-    else:
-        return DECISION_EXCLUDE, f"non-priority gene {gene} with {impact} impact"
+        return DECISION_EXCLUDE, f"rule 1: low depth {depth} < min_depth {min_depth}"
+    if quality < min_quality:
+        return DECISION_EXCLUDE, f"rule 2: low quality {quality} < min_quality {min_quality}"
+    if is_priority and impact in PRIORITY_IMPACTS:
+        return DECISION_PRIORITIZE, f"rule 3: priority gene {gene} with {impact} impact"
+    if is_priority and impact in LOW_IMPACT:
+        return DECISION_REVIEW, f"rule 4: priority gene {gene} with {impact} impact"
+    if not is_priority and impact in PRIORITY_IMPACTS:
+        return DECISION_REVIEW, f"rule 5: non-priority gene {gene} with {impact} impact"
+    if not is_priority and impact in LOW_IMPACT:
+        return DECISION_EXCLUDE, f"rule 6: non-priority gene {gene} with {impact} impact"
+
+    raise ValueError(f"Unknown impact: {impact}")
 
 
 def triage(rows: list[dict], params: dict) -> list[dict]:

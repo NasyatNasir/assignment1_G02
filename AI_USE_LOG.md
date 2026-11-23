@@ -169,28 +169,61 @@
 # AI USE LOG: MEMBER 3
 
 - Course: SECB3203
-- Assessment: <e.g. Lab 4>
-- Student name: <full name>
-- Matric no: <matric>
-- Group ID: <group work only, else n/a>
-- AI level: <0, 1 or 2 - see the assessment brief>
-- Tools cited: <UTM format, e.g. OpenAI (2026). ChatGPT (GPT-5). Retrieved 12 October 2026 from https://chat.openai.com>
+- Assessment: ASSSIGNMENT 1
+- Student name: MOHAMAD FARHAN BIN MOHAMAD HARIRI
+- Matric no: A24CS0114
+- Group ID: G02
+- AI level: 1
+- Tools cited: Google (2026). Gemini. Retrieved 23 November 2026 from https://gemini.google.com
 
 ## Declaration (tick exactly one)
 
 - [ ] NIL RETURN: I did not use any generative AI tool for this assessment.
-- [ ] I used AI. Every interaction that influenced my work is logged below. The log is true and complete.
+- [X] I used AI. Every interaction that influenced my work is logged below. The log is true and complete.
 
 ## Entry 1
 
-- Date: <Date and time of the interaction>
-- Tool: <Tool name, version, access date and URL (UTM citation format)>
-- Purpose: <One of: explain, hint, review, debug, generate-code, generate-text, tests-plan, other>
-- Prompt: <The exact prompt you typed (paste it)>
-- Output: <What the AI gave back, in 1 to 3 lines (attach the full text if you used it)>
-- Verified by: <How you checked it: ran pytest, read the docs, compared with data, asked lecturer>
-- My change: <What you accepted, rejected or rewrote, and why>
-- Used in: <File and function, or report section, where it ended up (or 'not used')>
+- Date: 20/11/2026
+- Tool: Gemini, gemini.google.com, retrieved 20November 2026
+- Purpose: code-review, refactoring-hints
+- Prompt: what do i need to replace actually
+- Output: Gave hints on reusing existing top-level constants (DECISIONS, IMPACT_ORDER, PRIORITY_IMPACTS) instead of defining duplicates, replacing .casefold() with .upper()/.lower(), adding rule tags to reason strings, and using standalone if blocks instead of if/elif/else.
+- Verified by: Reviewed against src/a1_triage.py docstrings and ran python -m pytest
+- My change:Refactored my constants and conditional checks in classify_variant() based on the hints and added ValueError handling for invalid impacts.
+- Used in: src/a1_triage.py
+
+## Entry 2
+
+- Date: 21/11/2026
+- Tool: Gemini, gemini.google.com, retrieved 21 November 2026
+- Purpose: tests-plan, error-fixing
+- Prompt: hints on writing unit tests for classify_variant() and triage() based on the group's testing rules, and shared screenshots asking for hints to fix "make_row" is not defined and "PARAMS" is not defined warnings
+- Output: Gave hints on structuring tests for classify_variant() (checking ValueError) and triage() (checking input immutability), and pointed out why make_row and PARAMS caused NameError warnings in the new test file.
+- Verified by: Ran python -m pytest
+- My change: Defined PARAMS and make_row in my test file and wrote my own test cases and assertions for classify_variant() and triage().
+- Used in: tests/test_a1_triage.py
+
+## Entry 3
+
+- Date: 21/11/2026
+- Tool: Gemini, gemini.google.com, retrieved 21 November 2026
+- Purpose: error-fixing
+- Prompt: hints on fixing string matching bugs and CSV formatting issues in classify_variant() after PR review feedback on .casefold() and reason strings.
+- Output: Pointed out how .upper() and .lower() align with uppercase gene symbols and lowercase impact constants, and reminded that reason strings must not contain commas so CSV output stays unquoted.
+- Verified by: Checked results_to_csv() output and ran python -m pytest
+- My change: Switched gene normalization to .upper(), impact normalization to .lower(), and formatted rule reason strings without commas.
+- Used in: src/a1_triage.py
+
+## Entry 4
+
+- Date: 22/11/2026
+- Tool: Gemini, gemini.google.com, retrieved 22 November 2026
+- Purpose: ide-configuration
+- Prompt: how to fix VS Code Pylance warning Import "a1_triage" could not be resolved in my test file.
+- Output: Gave hints on adding "src" to python.analysis.extraPaths in VS Code workspace settings so the editor resolves modules inside the src/ folder.
+- Verified by: Checked VS Code Problems tab and confirmed python -m pytest still passed
+- My change: Updated .vscode/settings.json with python.analysis.extraPaths so VS Code recognizes a1_triage imports
+- Used in: .vscode/settings.json
 
 <!-- Copy the whole 'Entry' block for each extra interaction: ## Entry 2, ## Entry 3 ... -->
 
@@ -227,5 +260,5 @@
 
 - Signed: MUHAMMAD NASYAT BIN MOHAMAD NASIR, A24CS0141, 22/11/2026
 - Signed: ZARIFF BIN MOHAMMAD AZAM, A24CS0217, 22/11/2026
-- Signed: <full name, matric, date>
+- Signed: MOHAMAD FARHAN BIN MOHAMAD HARIRI, A24CS0114, 22/11/2026
 - Signed: <full name, matric, date>
