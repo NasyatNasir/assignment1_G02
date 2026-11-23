@@ -8,9 +8,10 @@ Complete this file in the first week, commit it, and do not delete the headings.
 
 - Group ID: G02
 - Member 1: MUHAMMAD NASYAT BIN MOHAMAD NASIR, A24CS0141, Designer and Coordinator
-- Member 2: MOHAMAD FARHAN BIN MOHAMAD HARIRI, A24CS0114, Implementer
-- Member 3: MOHAMAD ASYIK ILLAHI BIN NASRUDDIN, A24CS0113, Tester
-- Member 4: ZARIFF BIN MOHAMMAD AZAM , A24CS0217, Reviewer
+- Member 2: ZARIFF BIN MOHAMMAD AZAM , A24CS0217, Reviewer
+- Member 3: MOHAMAD FARHAN BIN MOHAMAD HARIRI, A24CS0114, Implementer
+- Member 4: MOHAMAD ASYIK ILLAHI BIN NASRUDDIN, A24CS0113, Tester
+
 
 ## 2. Roles
 
@@ -74,4 +75,4 @@ every member signs the log and this contract.
 - Signed: MUHAMMAD NASYAT BIN MOHAMAD NASIR, A24CS0141, 17/11/2026
 - Signed: ZARIFF BIN MOHAMMAD AZAM, A24CS0217, 18/11/2026
 - Signed: MOHAMAD FARHAN BIN MOHAMAD HARIRI, A24CS0114, 18/11/2026
-- Signed: <full name>, <matric number>, <date>
+- Signed: MOHAMAD ASYIK ILLAHI BIN NASRUDDIN , A24CS0113, 22/11/2026
