@@ -71,10 +71,10 @@ See [docs/design.md](docs/design.md). It describes how we broke the problem down
 
 | Member | Main contributions | Commits |
 |---|---|---|
-| MUHAMMAD NASYAT BIN MOHAMAD NASIR | `decision_counts`, `impactCounts` | <number> |
-| ZARIFF BIN MOHAMMAD AZAM | <files or functions> | <number> |
-| MOHAMAD FARHAN BIN MOHAMAD HARIRI | <files or functions> | <number> |
-| MOHAMAD ASYIK ILLAHI BIN NASRUDDIN | `results_to_csv`, `build_report`, and their test cases in `tests/test_visible.py` | <number> |
+| MUHAMMAD NASYAT BIN MOHAMAD NASIR | `decision_counts`, `impactCounts` | 7 |
+| ZARIFF BIN MOHAMMAD AZAM | "gene_summary', 'rank_variants' | 7 |
+| MOHAMAD FARHAN BIN MOHAMAD HARIRI | 'classify_variant', 'triage' | 3 |
+| MOHAMAD ASYIK ILLAHI BIN NASRUDDIN | `results_to_csv`, `build_report`, and their test cases in `tests/test_visible.py` | 5 |
 
 ## AI use
 
