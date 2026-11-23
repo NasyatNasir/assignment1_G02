@@ -205,24 +205,18 @@ def results_to_csv(results: list[dict]) -> str:
 
 
 def build_report(results: list[dict], params: dict) -> str:
-    """Short text report; the line formats are fixed so the report can be checked.
-
-    Lines: title, 'Thresholds: min_depth=D min_quality=Q', 'Priority genes: A, B, ...',
-    'Variants: N', one 'decision: count' line per decision, a blank line,
-    'Top K variants' and then 'rank. variant | gene | impact | decision' lines.
-    """
-    k= params["top_k"]
-    counts=decision_counts(results)
-    lines= [
+    k = params["top_k"]
+    counts = decision_counts(results)
+    lines = [
         "Variant Triage Report",
-        f"Thresholds:min depth={params['min_depth']} min_quality={params['min_quality']}",
-        f"Priority genes : {', '.join(params['priority_genes'])}",
+        f"Thresholds: min_depth={params['min_depth']} min_quality={params['min_quality']}",
+        f"Priority genes: {', '.join(params['priority_genes'])}",
         f"Variants: {len(results)}",
     ]
-    lines.extend(f"{decision}:{count}" for decision,count in counts.items())
+    lines.extend(f"{decision}: {count}" for decision, count in counts.items())
     lines.append("")
-    lines.append(f"Top{k}variants")
-    for rank,row in enumerate(rank_variants(results,k),start=1):
+    lines.append(f"Top {k} variants")
+    for rank, row in enumerate(rank_variants(results, k), start=1):
         lines.append(f"{rank}. {row['variant']} | {row['gene']} | {row['impact']} | {row['decision']}")
     return "\n".join(lines) + "\n"
 
