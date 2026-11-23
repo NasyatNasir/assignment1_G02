@@ -12,6 +12,19 @@ from a1_triage import (
     build_report,
     main
 )
+PARAMS = {"min_depth": 10, "min_quality": 80, "priority_genes": ["BRCA1", "TP53"], "top_k": 3}
+
+
+def make_row(variant="v1", gene="BRCA1", depth=40, quality=95, impact="high", pos=1000):
+    return {
+        "variant": variant,
+        "gene": gene,
+        "chrom": "17",
+        "pos": str(pos),
+        "depth": str(depth),
+        "quality": str(quality),
+        "impact": impact,
+    }
 
 def test_decision_counts_mixed():
     results = [{"decision": "exclude"}, {"decision": "review"}, {"decision": "exclude"}]
@@ -164,3 +177,18 @@ def test_rank_variants_negative_k():
 
     with pytest.raises(ValueError):
         rank_variants(results, -1)
+
+PARAMS = {"min_depth": 10, "min_quality": 80, "priority_genes": ["BRCA1", "TP53"], "top_k": 3}
+def test_classify_variant_invalid_impact_raises_value_error():
+    with pytest.raises(ValueError):
+        classify_variant(make_row(impact="invalid"), PARAMS)
+
+def test_triage_preserves_order_and_does_not_mutate_inputs():
+    row1 = make_row(variant="v1", gene="BRCA1", impact="low")
+    row2 = make_row(variant="v2", gene="MYC", impact="high")
+    rows = [row1, row2]
+
+    results = triage(rows, PARAMS)
+
+    assert [r["decision"] for r in results] == ["review", "review"]
+    assert "decision" not in row1 and "reason" not in row1    
