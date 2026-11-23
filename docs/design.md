@@ -66,8 +66,8 @@ Priority genes from data/params.json: APC, MLH1, PTEN, RB1, TP53
 ## 5. Work plan
 
 - Member 1: design.md, GROUP_CONTRACT.md, decision_counts(), impact_counts(), test for both functions
-- Member 2: classify_variant(), triage(), tests for both functions
-- Member 3: gene_summary(), rank_variants(), tests for both functions
+- Member 2: gene_summary(), rank_variants(), tests for both functions
+- Member 3: classify_variant(), triage(), tests for both functions
 - Member 4: results_to_csv(), build_report(), README.md, ruff check, and final pytest, tests for both functions
 
 Order: design first, then functions, then tests, then README. Each member reads another member's function before it is merged.
